@@ -1,0 +1,11 @@
+<html>
+<head>
+  <script>
+    // Dit script haalt de nieuwste link op via een gratis openbare tekst-opslag
+    fetch('https://kvdb.io')
+      .then(res => res.text())
+      .then(url => { window.location.href = url; });
+  </script>
+</head>
+<body>Redirectioneren naar de videoserver...</body>
+</html>
