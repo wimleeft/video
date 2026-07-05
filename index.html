@@ -1,11 +1,28 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <title>Videoserver Laden...</title>
   <script>
-    // Dit script haalt de nieuwste link op via een gratis openbare tekst-opslag
-    fetch('https://kvdb.io')
-      .then(res => res.text())
-      .then(url => { window.location.href = url; });
+    // Dit script haalt vlijmscherp de allernieuwste link op uit de database
+    fetch("https://kvdb.io")
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(url) {
+        if (url && url.startsWith("http")) {
+          window.location.replace(url);
+        } else {
+          document.body.innerHTML = "⚠️ De videoserver staat momenteel uit. Start het script in Termux.";
+        }
+      })
+      .catch(function(error) {
+        document.body.innerHTML = "❌ Verbindingsfout met de link-database. Probeer het opnieuw.";
+      });
   </script>
 </head>
-<body>Redirectioneren naar de videoserver...</body>
+<body style="font-family:sans-serif; text-align:center; margin-top:50px;">
+  <h2>⏳ Bezig met doorsturen naar de videoserver van het koor...</h2>
+  <p>Een moment geduld alstublieft.</p>
+</body>
 </html>
