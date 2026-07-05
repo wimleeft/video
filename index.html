@@ -4,20 +4,19 @@
   <meta charset="utf-8">
   <title>Videoserver Laden...</title>
   <script>
-    // Dit script haalt vlijmscherp de allernieuwste link op uit de database
-    fetch("https://kvdb.io")
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(url) {
+    // Haalt de link vlijmscherp op via Dontpad (onblokkeerbaar)
+    fetch("https://allorigins.win" + encodeURIComponent("http://dontpad.com"))
+      .then(response => response.json())
+      .then(data => {
+        let url = data.contents.trim();
         if (url && url.startsWith("http")) {
           window.location.replace(url);
         } else {
           document.body.innerHTML = "⚠️ De videoserver staat momenteel uit. Start het script in Termux.";
         }
       })
-      .catch(function(error) {
-        document.body.innerHTML = "❌ Verbindingsfout met de link-database. Probeer het opnieuw.";
+      .catch(() => {
+        document.body.innerHTML = "❌ Verbindingsfout. Probeer de pagina te vernieuwen.";
       });
   </script>
 </head>
