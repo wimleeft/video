@@ -18,9 +18,10 @@
   <div class="container">
     <h2>🎵 Koor Project Portaal</h2>
     <p>Welkom bij de centrale videoserver van het koor.</p>
-    <p>Klik op de groene knop hieronder om direct naar het visuele controlepaneel te gaan. Hier kun je repertoire-mappen bekijken, video's streamen en nieuwe Shotcut-bestanden uploaden.</p>
+    <p>Klik op de groene knop hieronder om direct naar het visuele controlepaneel te gaan.</p>
     
-    <!-- FIX: We gebruiken de dubbele slash // zodat het protocol (http/https) overal vlekkeloos matcht zonder SSL-crashes op oude iPhones -->
+    <!-- FIX 1 & 2: Geen 'http', geen 'localhost' en geen poortnummers meer in dit bestand! -->
+    <!-- Dit dwingt de browser om strak binnen de veilige HTTPS ngrok-tunnel te communiceren. -->
     <a href="//frightful-paving-plated.ngrok-free.dev/" class="btn-portal">🚀 Open het Controlepaneel</a>
   </div>
 
