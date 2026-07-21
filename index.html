@@ -1,50 +1,105 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8">
-  <title>Koor Project - Videoserver Portaal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; color: #333; text-align: center; }
-    .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: left; }
-    h2 { color: #0056b3; text-align: center; margin-top: 0; }
-    h3 { border-bottom: 2px solid #007bff; padding-bottom: 5px; color: #007bff; margin-top: 25px; }
-    ul { list-style: none; padding-left: 0; line-height: 2; }
-    li { margin-bottom: 8px; padding-left: 5px; }
-    a { color: #28a745; text-decoration: none; font-weight: bold; font-size: 16px; }
-    a:hover { text-decoration: underline; color: #218838; }
-    .btn-upload { display: block; width: 100%; max-width: 250px; margin: 20px auto; padding: 12px; background: #007bff; color: #fff; text-align: center; font-weight: bold; border-radius: 5px; text-decoration: none; }
-    .btn-upload:hover { background: #0069d9; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koor Project - Videoserver</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; color: #333; text-align: center; }
+        .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: left; }
+        h2 { color: #0056b3; text-align: center; margin-top: 0; border-bottom: 3px solid #0056b3; padding-bottom: 10px; }
+        h3 { color: #007bff; margin-top: 25px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 2px solid #ddd; }
+        ul { list-style: none; padding-left: 0; line-height: 2.2; }
+        li { margin-bottom: 6px; padding: 5px 10px; background: #f9f9f9; border-radius: 4px; border-left: 4px solid #28a745; display: flex; justify-content: space-between; align-items: center; }
+        a { color: #28a745; text-decoration: none; font-weight: bold; font-size: 16px; }
+        a:hover { text-decoration: underline; color: #1e7e34; }
+        
+        /* UPLOAD PORTAAL LAYOUT */
+        .upload-box { background: #e9f2ff; padding: 20px; border-radius: 6px; border: 2px dashed #007bff; margin-top: 30px; }
+        .upload-box h4 { margin-top: 0; color: #0056b3; font-size: 16px; }
+        select, input[type="file"], button { padding: 10px; margin-bottom: 10px; width: 100%; box-sizing: border-box; border-radius: 4px; border: 1px solid #ccc; font-size: 15px; }
+        button { background: #28a745; color: #fff; font-weight: bold; border: 0; cursor: pointer; font-size: 16px; margin-top: 5px; }
+        button:hover { background: #218838; }
+        #status { font-weight: bold; color: #007bff; margin-top: 10px; text-align: center; }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>🎵 Koor Project - Repertoire & Muziek</h2>
-    <p style="text-align:center; color:#666;">Klik op een lied om de video met meelopende tekst direct te starten.</p>
+<div class="container">
+    <h2>🎵 Koor Project - Hoofdmenu</h2>
+    <p style="text-align:center; color:#666; font-style:italic;">Klik op een map of lied om direct te openen.</p>
 
-    <!-- VERWYZING NAAR JE UPLOADPAGINA INDIEN NODIG -->
-    <a href="//frightful-paving-plated.ngrok-free.dev/upload.html" class="btn-upload">➕ Nieuw Shotcut Bestand Laden</a>
+    <!-- AUTOMATISCHE LINKEN NAAR JE BESTAANDE MAPPENSTRUCTUUR -->
+    <h3>📂 Bestaande Repertoire Mappen</h3>
+    <div style="line-height: 2.5; font-size: 18px;">
+        <!-- target="_blank" dwingt iOS Safari om de rauwe Node-lijst in een nieuw venster te openen mocht dat nodig zijn -->
+        🔹 <a href="/Sopranen/" style="color:#007bff;">Naar de map: Sopranen</a><br>
+        🔹 <a href="/Alten/" style="color:#007bff;">Naar de map: Alten</a><br>
+        🔹 <a href="/Algemeen/" style="color:#007bff;">Naar de map: Algemeen / Piano begeleiding</a>
+    </div>
 
-    <!-- SECTIE SOPRANEN -->
-    <h3>📂 Sopranen</h3>
-    <ul>
-      <li><a href="//frightful-paving-plated.ngrok-free.dev/Sopranen/Oefenlied_01_Sopraan.mp4" target="_blank">▶ Oefenlied 01 (Zang + Tekstregels)</a></li>
-      <li><a href="//frightful-paving-plated.ngrok-free.dev/Sopranen/Oefenlied_02_Sopraan.mp4" target="_blank">▶ Oefenlied 02 (Zang + Tekstregels)</a></li>
-    </ul>
+    <!-- HET GEÏNTEGREERDE UPLOAD PORTAAL -->
+    <div class="upload-box">
+        <h4>➕ Shotcut MP4-bestand Toevoegen & Sorteren</h4>
+        
+        <label style="font-weight:bold; display:block; margin-bottom:5px; font-size:14px;">Kies doelmap:</label>
+        <select id="folder-select">
+            <option value="">[Hoofdmap /] </option>
+            <option value="Sopranen">📂 Sopranen</option>
+            <option value="Alten">📂 Alten</option>
+            <option value="Algemeen">📂 Algemeen</option>
+        </select>
 
-    <!-- SECTIE ALTEN -->
-    <h3>📂 Alten</h3>
-    <ul>
-      <li><a href="//frightful-paving-plated.ngrok-free.dev/Alten/Oefenlied_01_Alt.mp4" target="_blank">▶ Oefenlied 01 (Zang + Tekstregels)</a></li>
-    </ul>
+        <input type="file" id="file-input" required />
+        <button onclick="uploadFile()">🚀 Uploaden naar 1TB Schijf</button>
+        <div id="status"></div>
+    </div>
+</div>
 
-    <!-- SECTIE ALGEMEEN / INSTRUMENTAAL -->
-    <h3>📂 Algemeen / Piano</h3>
-    <ul>
-      <li><a href="//frightful-paving-plated.ngrok-free.dev/Algemeen/Volledige_Koor_Mix.mp4" target="_blank">▶ Volledige Koor Mix (Met Melodie)</a></li>
-    </ul>
-  </div>
+<script>
+    function uploadFile() {
+        const fileInput = document.getElementById('file-input');
+        const folderSelect = document.getElementById('folder-select');
+        const statusDiv = document.getElementById('status');
+        
+        if (fileInput.files.length === 0) {
+            statusDiv.innerHTML = "<span style='color:#dc3545;'>❌ Selecteer eerst een bestand!</span>";
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const selectedFolder = folderSelect.value;
+        
+        // KOGELVRIJE ROUTING: We uploaden altijd via POST naar de actieve Node-server
+        // Als er een map is gekozen, sturen we de file naar '/Sopranen/' etc.
+        let uploadPath = '/';
+        if (selectedFolder) {
+            uploadPath = '/' + selectedFolder + '/';
+            statusDiv.innerHTML = "⏳ Uploaden naar <b>" + selectedFolder + "</b>: " + file.name + "...";
+        } else {
+            statusDiv.innerHTML = "⏳ Uploaden naar Hoofdmap... " + file.name + "...";
+        }
+
+        const formData = new FormData();
+        formData.append('file', file, file.name);
+
+        fetch(uploadPath, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok || response.status === 200 || response.status === 201 || response.status === 204) {
+                statusDiv.innerHTML = "<span style='color:#28a745;'>✅ Upload geslaagd! Sortering voltooid.</span>";
+                setTimeout(() => { window.location.href = uploadPath; }, 1500);
+            } else {
+                statusDiv.innerHTML = "<span style='color:#dc3545;'>❌ Upload geweigerd (Status: " + response.status + ")</span>";
+            }
+        })
+        .catch(err => {
+            statusDiv.innerHTML = "<span style='color:#dc3545;'>❌ Netwerkfout: " + err + "</span>";
+        });
+    }
+</script>
 
 </body>
 </html>
